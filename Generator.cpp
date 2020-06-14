@@ -17,7 +17,7 @@ void Generator::render(sf::RenderWindow& window)
 		inst.render(window);
 	}
 }
-void Generator::update(sf::Time deltaTime)
+void Generator::update(float deltaTime)
 {
 	for (auto& inst : instances_) {
 		inst.update(deltaTime);

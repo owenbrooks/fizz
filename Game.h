@@ -9,7 +9,7 @@ public:
 	void run();
 private:
 	void processEvents();
-	void update(sf::Time deltaTime);
+	void update(float deltaTime);
 	void render();
 private:
 	sf::RenderWindow window_;

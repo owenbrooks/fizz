@@ -1,21 +1,40 @@
 #include "Game.h"
+#include <iostream>
 
-Game::Game() : window_(sf::VideoMode(800, 800), "Fizz"), gen_(sf::VideoMode::getDesktopMode().height)
+Game::Game() : window_(sf::VideoMode(800, 800), "Fizz"), gen_(sf::VideoMode::getDesktopMode().height), info_()
 {
 	sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
 	window_.create(sf::VideoMode(desktop.width, desktop.height, desktop.bitsPerPixel), "Fizz", sf::Style::Fullscreen);
 	window_.setFramerateLimit(120);
+	//window_.setFramerateLimit(60);
+	/*sf::Font font;
+	if (!font.loadFromFile("arial.ttf")) {
+		std::cout << "Error loading font" << std::endl;
+	}
+	else
+	{
+		info_.setFont(font);
+	}*/
 }
 
 void Game::run()
 {
 	sf::Clock clock;
+	float accumulator = 0.f;
+	constexpr float deltaTime = 1.f/120.f;
 
 	while (window_.isOpen())
 	{
-		sf::Time deltaTime = clock.restart();
 		processEvents();
-		update(deltaTime);
+		sf::Time frameTime = clock.restart();
+		accumulator += frameTime.asSeconds();
+
+		while (accumulator >= deltaTime)
+		{
+			update(deltaTime*1000);
+			accumulator -= deltaTime;
+
+		}
 		render();	
 	}
 }
@@ -51,7 +70,7 @@ void Game::processEvents()
 	}
 }
 
-void Game::update(sf::Time deltaTime)
+void Game::update(float deltaTime)
 {
 	gen_.update(deltaTime);
 }

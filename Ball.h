@@ -6,7 +6,7 @@ class Ball
 public:
 	Ball(float x, float y, int low_limit);
 	void render(sf::RenderWindow& window);
-	void update(sf::Time deltaTime);
+	void update(float deltaTime);
 	void setPosition(sf::Vector2<float> newPos);
 	void setVelocity(sf::Vector2f newVel);
 private:

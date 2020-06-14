@@ -9,7 +9,7 @@ public:
 	Generator(int low_limit);
 	void createBallAt(float x, float y);
 	void render(sf::RenderWindow& window);
-	void update(sf::Time deltaTime);
+	void update(float deltaTime);
 	void clear();
 private:
 	std::vector<Ball> instances_;
