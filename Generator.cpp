@@ -1,5 +1,5 @@
 #include "Generator.h"
-
+#include "Collision.h"
 Generator::Generator(int low_limit) : low_limit_(low_limit), instances_()
 {
 }
@@ -19,6 +19,21 @@ void Generator::render(sf::RenderWindow& window)
 }
 void Generator::update(float deltaTime)
 {
+	if (instances_.size() > 1) {
+		for (auto inst_it_a = instances_.begin(); inst_it_a != instances_.end() - 1; inst_it_a++) {
+			for (auto inst_it_b = inst_it_a + 1; inst_it_b != instances_.end(); inst_it_b++) {
+				const CollisionResult collision_res = Collision::collides(*inst_it_a, *inst_it_b);
+				if (collision_res.collided) {
+					(*inst_it_a).setCollided(true);
+					(*inst_it_b).setCollided(true);
+				}
+				else {
+					(*inst_it_a).setCollided(false);
+					(*inst_it_b).setCollided(false);
+				}
+			}
+		}
+	}
 	for (auto& inst : instances_) {
 		inst.update(deltaTime);
 	}

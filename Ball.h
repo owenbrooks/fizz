@@ -8,8 +8,11 @@ public:
 	void render(sf::RenderWindow& window);
 	void update(float deltaTime);
 	void setPosition(sf::Vector2<float> newPos);
+	sf::Vector2f getPosition();
 	void setVelocity(sf::Vector2f newVel);
 	void reset();
+	void setCollided(bool);
+	float radius = 50.f;
 private:
 	sf::Vector2f pos_;
 	sf::Vector2f vel_;

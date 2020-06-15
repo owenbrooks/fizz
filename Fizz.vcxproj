@@ -164,6 +164,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Ball.cpp" />
+    <ClCompile Include="Collision.cpp" />
     <ClCompile Include="Fizz.cpp" />
     <ClCompile Include="Generator.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -171,6 +172,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ball.h" />
+    <ClInclude Include="Collision.h" />
     <ClInclude Include="Generator.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Info.h" />

@@ -1,6 +1,5 @@
 #include "Ball.h"
 
-constexpr float radius = 50.f;
 constexpr float gravity = 0.003f;
 constexpr float cor = 0.8f;
 constexpr float vel_y_threshold = 0.2f;
@@ -45,4 +44,17 @@ void Ball::reset()
 {
 	shape_.setPosition(init_pos_);
 	vel_ = sf::Vector2f(0.f, 0.f);
+}
+void Ball::setCollided(bool collided)
+{
+	if (collided) {
+		shape_.setFillColor(sf::Color::Red);
+	}
+	else {
+		shape_.setFillColor(sf::Color::Magenta);
+	}
+}
+sf::Vector2f Ball::getPosition()
+{
+	return shape_.getPosition();
 }
