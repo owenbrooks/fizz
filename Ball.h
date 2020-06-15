@@ -9,10 +9,12 @@ public:
 	void update(float deltaTime);
 	void setPosition(sf::Vector2<float> newPos);
 	void setVelocity(sf::Vector2f newVel);
+	void reset();
 private:
 	sf::Vector2f pos_;
 	sf::Vector2f vel_;
 	sf::CircleShape shape_;
 	int y_limit_;
+	sf::Vector2f init_pos_;
 };
 

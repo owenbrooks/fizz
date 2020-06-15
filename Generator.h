@@ -11,6 +11,7 @@ public:
 	void render(sf::RenderWindow& window);
 	void update(float deltaTime);
 	void clear();
+	void reset();
 private:
 	std::vector<Ball> instances_;
 	std::vector<Ball> prev_instances_;

@@ -27,3 +27,9 @@ void Generator::clear()
 {
 	instances_.clear();
 }
+void Generator::reset()
+{
+	for (auto& inst : instances_) {
+		inst.reset();
+	}
+}

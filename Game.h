@@ -12,7 +12,6 @@ private:
 	void processEvents();
 	void update(float deltaTime, float frameTime);
 	void render();
-private:
 	sf::RenderWindow window_;
 	Generator gen_;
 	Info info_;

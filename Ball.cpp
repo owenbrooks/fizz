@@ -5,7 +5,7 @@ constexpr float gravity = 0.003f;
 constexpr float cor = 0.8f;
 constexpr float vel_y_threshold = 0.2f;
 
-Ball::Ball(float x, float y, int low_limit) : vel_(0.f, 0.f), shape_(sf::CircleShape(radius, 8)), y_limit_(low_limit)
+Ball::Ball(float x, float y, int low_limit) : vel_(0.f, 0.f), shape_(sf::CircleShape(radius, 8)), y_limit_(low_limit), init_pos_(x, y)
 {
 	shape_.setPosition(x - radius, y - radius);
 	shape_.setFillColor(sf::Color::Magenta);
@@ -40,4 +40,9 @@ void Ball::setPosition(sf::Vector2<float> newPos)
 void Ball::setVelocity(sf::Vector2f newVel)
 {
 	vel_ = newVel;
+}
+void Ball::reset()
+{
+	shape_.setPosition(init_pos_);
+	vel_ = sf::Vector2f(0.f, 0.f);
 }

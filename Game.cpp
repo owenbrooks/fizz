@@ -54,6 +54,9 @@ void Game::processEvents()
 			else if (event.key.code == sf::Keyboard::Key::C) {
 				gen_.clear();
 			}
+			else if (event.key.code == sf::Keyboard::Key::R) {
+				gen_.reset();
+			}
 			break;
 		case sf::Event::MouseButtonPressed:
 			if (event.mouseButton.button == sf::Mouse::Left) {
