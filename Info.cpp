@@ -1,6 +1,12 @@
 #include "Info.h"
 #include <iostream>
-Info::Info() : font_(), text_()
+#include <numeric>
+#include <cmath>
+#include <sstream>
+#include <iomanip>
+
+Info::Info() : font_(), text_(), frame_index_(0), 
+frame_time_buf_({0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f})
 {
 }
 void Info::setFont(sf::Font& font)
@@ -18,5 +24,17 @@ void Info::render(sf::RenderWindow& window)
 }
 void Info::update(float frameTime)
 {
-	text_.setString(std::string("fps: ") + std::to_string(1.f/frameTime));
+	frame_time_buf_[frame_index_] = frameTime;
+	if (frame_index_ < frame_time_buf_.size() - 1) {
+		frame_index_++;
+	}
+	else {
+		frame_index_ = 0;
+	}
+	float avg_frame_time = std::accumulate(frame_time_buf_.begin(), frame_time_buf_.end(), 0.f)/frame_time_buf_.size();
+
+	float fps = 1.f / avg_frame_time;
+	std::stringstream fps_string;
+	fps_string << "fps: " << std::fixed << std::setprecision(1) << fps;
+	text_.setString(fps_string.str());
 }
