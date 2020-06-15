@@ -13,6 +13,7 @@ public:
 	void clear();
 private:
 	std::vector<Ball> instances_;
+	std::vector<Ball> prev_instances_;
 	int low_limit_;
 };
 

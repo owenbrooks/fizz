@@ -7,14 +7,13 @@ Game::Game() : window_(sf::VideoMode(800, 800), "Fizz"), gen_(sf::VideoMode::get
 	window_.create(sf::VideoMode(desktop.width, desktop.height, desktop.bitsPerPixel), "Fizz", sf::Style::Fullscreen);
 	window_.setFramerateLimit(120);
 	//window_.setFramerateLimit(60);
-	/*sf::Font font;
-	if (!font.loadFromFile("arial.ttf")) {
+	if (!font_.loadFromFile("cour.ttf")) {
 		std::cout << "Error loading font" << std::endl;
 	}
 	else
 	{
-		info_.setFont(font);
-	}*/
+		info_.setFont(font_);
+	}
 }
 
 void Game::run()
@@ -31,7 +30,7 @@ void Game::run()
 
 		while (accumulator >= deltaTime)
 		{
-			update(deltaTime*1000);
+			update(deltaTime*1000, frameTime.asSeconds());
 			accumulator -= deltaTime;
 
 		}
@@ -58,7 +57,7 @@ void Game::processEvents()
 			break;
 		case sf::Event::MouseButtonPressed:
 			if (event.mouseButton.button == sf::Mouse::Left) {
-				gen_.createBallAt(event.mouseButton.x, event.mouseButton.y);
+				gen_.createBallAt((float)event.mouseButton.x, (float)event.mouseButton.y);
 			}
 			break;
 		case sf::Event::MouseMoved:
@@ -70,14 +69,16 @@ void Game::processEvents()
 	}
 }
 
-void Game::update(float deltaTime)
+void Game::update(float deltaTime, float frameTime)
 {
 	gen_.update(deltaTime);
+	info_.update(frameTime);
 }
 
 void Game::render()
 {
 	window_.clear();
 	gen_.render(window_);
+	info_.render(window_);
 	window_.display();
 }

@@ -167,11 +167,13 @@
     <ClCompile Include="Fizz.cpp" />
     <ClCompile Include="Generator.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Info.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ball.h" />
     <ClInclude Include="Generator.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="Info.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
