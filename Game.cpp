@@ -5,8 +5,8 @@ Game::Game() : window_(sf::VideoMode(800, 800), "Fizz"), gen_(sf::VideoMode::get
 {
 	sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
 	window_.create(sf::VideoMode(desktop.width, desktop.height, desktop.bitsPerPixel), "Fizz", sf::Style::Fullscreen);
-	window_.setFramerateLimit(120);
-	//window_.setFramerateLimit(60);
+	window_.setFramerateLimit(60);
+	window_.setVerticalSyncEnabled(true);
 	if (!font_.loadFromFile("cour.ttf")) {
 		std::cout << "Error loading font" << std::endl;
 	}
