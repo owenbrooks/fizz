@@ -1,11 +1,12 @@
 #include "Generator.h"
 #include "Collision.h"
-Generator::Generator(int low_limit) : low_limit_(low_limit), instances_()
+#include <cmath>
+Generator::Generator(int x_limit, int y_limit) : x_limit_(x_limit), y_limit_(y_limit), instances_(), paused_(false)
 {
 }
 void Generator::createBallAt(float x, float y)
 {
-	Ball newBall = Ball(x, y, low_limit_);
+	Ball newBall = Ball(x, y, y_limit_);
 	instances_.push_back(newBall);
 	if (instances_.size() > 1000) {
 		instances_.erase(instances_.begin());
@@ -19,6 +20,9 @@ void Generator::render(sf::RenderWindow& window)
 }
 void Generator::update(float deltaTime)
 {
+	if (paused_) {
+		return;
+	}
 	if (instances_.size() > 1) {
 		for (auto inst_it_a = instances_.begin(); inst_it_a != instances_.end() - 1; inst_it_a++) {
 			for (auto inst_it_b = inst_it_a + 1; inst_it_b != instances_.end(); inst_it_b++) {
@@ -47,4 +51,8 @@ void Generator::reset()
 	for (auto& inst : instances_) {
 		inst.reset();
 	}
+}
+void Generator::togglePaused()
+{
+	paused_ = !paused_;
 }
