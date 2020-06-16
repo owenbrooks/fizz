@@ -13,9 +13,9 @@ public:
 	void reset();
 	void setCollided(bool);
 	float radius = 50.f;
+	sf::Vector2f vel_;
 private:
 	sf::Vector2f pos_;
-	sf::Vector2f vel_;
 	sf::CircleShape shape_;
 	int y_limit_;
 	int x_limit_;

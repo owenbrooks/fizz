@@ -48,7 +48,7 @@ void Game::processEvents()
 			window_.close();
 			break;
 		case sf::Event::KeyPressed:
-			if (event.key.code == sf::Keyboard::Key::Q) { // 16 is for q
+			if (event.key.code == sf::Keyboard::Key::Q) {
 				window_.close();
 			}
 			else if (event.key.code == sf::Keyboard::Key::C) {
@@ -68,7 +68,7 @@ void Game::processEvents()
 			break;
 		case sf::Event::MouseMoved:
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S)) {
-				gen_.createBallAt(event.mouseMove.x, event.mouseMove.y);
+				gen_.createBallAt((float)event.mouseMove.x, (float)event.mouseMove.y);
 			}
 			break;
 		}

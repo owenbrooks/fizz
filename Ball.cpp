@@ -19,9 +19,9 @@ void Ball::update(float deltaTime)
 	if (shape_.getPosition().y + 2*radius < y_limit_ || vel_.y < 0) {
 		sf::Vector2f accel(0.f, gravity);
 		vel_ += accel * deltaTime;
-		shape_.move(0, vel_.y * deltaTime);
+		shape_.move(vel_.x * deltaTime, vel_.y * deltaTime);
 	}
-	else {
+	else { // collision with ground
 		shape_.setPosition(shape_.getPosition().x, y_limit_ - 2*radius);
 		if (vel_.y > vel_y_threshold) {
 			vel_.y = -cor * vel_.y;
@@ -29,7 +29,15 @@ void Ball::update(float deltaTime)
 		else {
 			vel_.y = 0;
 		}
-		shape_.move(0, vel_.y * deltaTime);
+		shape_.move(vel_.x * deltaTime, vel_.y * deltaTime);
+	}
+	if (shape_.getPosition().x + 2 * radius > x_limit_) {
+		shape_.setPosition(x_limit_ - 2 * radius, shape_.getPosition().y);
+		vel_.x = -cor * vel_.x;
+	}
+	else if (shape_.getPosition().x < 0) {
+		shape_.setPosition(0.f, shape_.getPosition().y);
+		vel_.x = -cor * vel_.x;
 	}
 }
 void Ball::setPosition(sf::Vector2<float> newPos) 
