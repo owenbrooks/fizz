@@ -6,7 +6,7 @@ Generator::Generator(int x_limit, int y_limit) : x_limit_(x_limit), y_limit_(y_l
 }
 void Generator::createBallAt(float x, float y)
 {
-	Ball newBall = Ball(x, y, y_limit_);
+	Ball newBall = Ball(x, y, x_limit_, y_limit_);
 	instances_.push_back(newBall);
 	if (instances_.size() > 1000) {
 		instances_.erase(instances_.begin());

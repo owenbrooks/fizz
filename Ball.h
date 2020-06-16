@@ -4,7 +4,7 @@
 class Ball
 {
 public:
-	Ball(float x, float y, int low_limit);
+	Ball(float x, float y, int x_limit, int y_limit);
 	void render(sf::RenderWindow& window);
 	void update(float deltaTime);
 	void setPosition(sf::Vector2<float> newPos);
@@ -18,6 +18,7 @@ private:
 	sf::Vector2f vel_;
 	sf::CircleShape shape_;
 	int y_limit_;
+	int x_limit_;
 	sf::Vector2f init_pos_;
 };
 
