@@ -19,7 +19,7 @@ void Generator::render(sf::RenderWindow& window)
 		inst.render(window);
 	}
 }
-void Generator::update(float deltaTime)
+void Generator::update(float deltaTime, const ConfigState& config)
 {
 	if (paused_) {
 		return;
@@ -31,7 +31,7 @@ void Generator::update(float deltaTime)
 				(*it_a).setCollided(collision_res.collided);
 				(*it_b).setCollided(collision_res.collided);
 				if (collision_res.collided) {
-					Collision::resolve_collision(*it_a, *it_b, collision_res);
+					Collision::resolve_collision(*it_a, *it_b, collision_res, config);
 				}
 			}
 		}
@@ -53,4 +53,8 @@ void Generator::reset()
 void Generator::togglePaused()
 {
 	paused_ = !paused_;
+}
+unsigned int Generator::getObjCount()
+{
+	return instances_.size();
 }

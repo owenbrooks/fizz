@@ -22,8 +22,10 @@ void Info::render(sf::RenderWindow& window)
 {
 	window.draw(text_);
 }
-void Info::update(float frameTime, const ConfigState& state)
+void Info::update(float frameTime, const ConfigState& state, unsigned int obj_count)
 {
+	std::string obj_count_str = "obj count: " + std::to_string(obj_count);
+
 	frame_time_buf_[frame_index_] = frameTime;
 	if (frame_index_ < frame_time_buf_.size() - 1) {
 		frame_index_++;
@@ -40,5 +42,5 @@ void Info::update(float frameTime, const ConfigState& state)
 	std::stringstream obj_obj_restitution_str;
 	obj_obj_restitution_str << "obj->obj: " << std::fixed << std::setprecision(2) << state.objRestitution;
 
-	text_.setString(fps_string.str() + '\n' + obj_obj_restitution_str.str());
+	text_.setString(obj_count_str + '\n' + fps_string.str() + '\n' + obj_obj_restitution_str.str());
 }

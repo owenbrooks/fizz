@@ -44,6 +44,22 @@ void Config::showCommandBox()
 }
 void Config::executeCommand()
 {
+	std::string propertyName;
+	std::string newValueStr;
+	size_t pos = _commandStr.find(" ");
+	if (pos != std::string::npos) {
+		propertyName = _commandStr.substr(0, pos);
+		newValueStr = _commandStr.substr(pos + 1);
+		if (propertyName == "ob") {
+			try {
+				float newValue = std::stof(newValueStr);
+				_state.objRestitution = newValue;
+			}
+			catch (std::invalid_argument& e) {
+				_inErrorState = true;
+			}
+		}
+	}
 	_active = false;
 	_commandStr.clear();
 }

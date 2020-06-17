@@ -94,9 +94,9 @@ void Game::processEvents()
 
 void Game::update(float deltaTime, float frameTime)
 {
-	gen_.update(deltaTime);
+	gen_.update(deltaTime, _config.getState());
 	_config.update(deltaTime);
-	info_.update(frameTime, _config.getState());
+	info_.update(frameTime, _config.getState(), gen_.getObjCount());
 }
 
 void Game::render()

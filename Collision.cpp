@@ -19,7 +19,7 @@ CollisionResult Collision::collides(Ball& obj1, Ball& obj2)
 	result.contactPoint = obj1.getPosition() + obj1.radius * result.unitNormal;
 	return result;
 }
-void Collision::resolve_collision(Ball& obj1, Ball& obj2, const CollisionResult& collision)
+void Collision::resolve_collision(Ball& obj1, Ball& obj2, const CollisionResult& collision, const ConfigState& config)
 {
 	sf::Vector2f rv = obj2.vel_ - obj1.vel_;
 	float velAlongNormal = VecTools::dot(rv, collision.unitNormal);
@@ -27,7 +27,7 @@ void Collision::resolve_collision(Ball& obj1, Ball& obj2, const CollisionResult&
 		// Objects are already moving away from each other, so no need for impulse
 		return;
 	}
-	float e = 0.8f; // coefficient of restitution
+	float e = config.objRestitution; // coefficient of restitution
 	constexpr float mass = 0.5f;
 	float j = -(1 + e) * velAlongNormal / (1/mass + 1/mass);
 	sf::Vector2f impulse = j * collision.unitNormal;

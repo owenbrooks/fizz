@@ -1,9 +1,11 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+constexpr float defaultObjRestitution = 0.8;
+constexpr float defaultBoundaryResitution = 0.8;
 struct ConfigState
 {
-	float objRestitution;
-	float boundaryRestitution;
+	float objRestitution = defaultObjRestitution;
+	float boundaryRestitution = defaultBoundaryResitution;
 };
 class Config
 {
@@ -17,7 +19,7 @@ public:
 	void setFont(sf::Font& font);
 	void update(float deltaTime);
 private:
-	bool _active = true;
+	bool _active = false;
 	sf::RenderWindow _window;
 	ConfigState _state;
 	std::string _commandStr;
@@ -26,5 +28,6 @@ private:
 	bool _caretVisible = true;
 	size_t _caretIndex;
 	sf::Clock _clock;
+	bool _inErrorState = false;
 };
 
