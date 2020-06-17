@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <array>
+#include "Config.h"
 
 class Info
 {
@@ -8,7 +9,7 @@ public:
 	Info();
 	void setFont(sf::Font& font);
 	void render(sf::RenderWindow& window);
-	void update(float frameTime);
+	void update(float frameTime, const ConfigState& state);
 private:
 	float currTime_ = 0.f;
 	std::array<float, 100> frame_time_buf_;

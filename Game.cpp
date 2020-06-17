@@ -1,7 +1,7 @@
 #include "Game.h"
 #include <iostream>
 
-Game::Game() : window_(sf::VideoMode(800, 800), "Fizz"), gen_(sf::VideoMode::getDesktopMode().width, sf::VideoMode::getDesktopMode().height), info_()
+Game::Game() : window_(sf::VideoMode(800, 800), "Fizz"), gen_(sf::VideoMode::getDesktopMode().width, sf::VideoMode::getDesktopMode().height), info_(), _config()
 {
 	sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
 	window_.create(sf::VideoMode(desktop.width, desktop.height, desktop.bitsPerPixel), "Fizz", sf::Style::Fullscreen);
@@ -13,6 +13,7 @@ Game::Game() : window_(sf::VideoMode(800, 800), "Fizz"), gen_(sf::VideoMode::get
 	else
 	{
 		info_.setFont(font_);
+		_config.setFont(font_);
 	}
 }
 
@@ -48,17 +49,27 @@ void Game::processEvents()
 			window_.close();
 			break;
 		case sf::Event::KeyPressed:
-			if (event.key.code == sf::Keyboard::Key::Q) {
-				window_.close();
+			if (!_config.isActive()) {
+				if (event.key.code == sf::Keyboard::Key::Q) {
+					window_.close();
+				}
+				else if (event.key.code == sf::Keyboard::Key::C) {
+					gen_.clear();
+				}
+				else if (event.key.code == sf::Keyboard::Key::R) {
+					gen_.reset();
+				}
+				else if (event.key.code == sf::Keyboard::Key::P) {
+					gen_.togglePaused();
+				}
+				else if (event.key.code == sf::Keyboard::Key::SemiColon) {
+					if (event.key.shift) {
+						_config.showCommandBox();
+					};
+				}
 			}
-			else if (event.key.code == sf::Keyboard::Key::C) {
-				gen_.clear();
-			}
-			else if (event.key.code == sf::Keyboard::Key::R) {
-				gen_.reset();
-			}
-			else if (event.key.code == sf::Keyboard::Key::P) {
-				gen_.togglePaused();
+			else if (event.key.code == sf::Keyboard::Key::Enter) {
+				_config.executeCommand();
 			}
 			break;
 		case sf::Event::MouseButtonPressed:
@@ -67,8 +78,14 @@ void Game::processEvents()
 			}
 			break;
 		case sf::Event::MouseMoved:
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S)) {
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S) && !_config.isActive()) {
 				gen_.createBallAt((float)event.mouseMove.x, (float)event.mouseMove.y);
+			}
+			break;
+		case sf::Event::TextEntered:
+			if (_config.isActive())
+			{
+				_config.handleEvent(event);
 			}
 			break;
 		}
@@ -78,7 +95,8 @@ void Game::processEvents()
 void Game::update(float deltaTime, float frameTime)
 {
 	gen_.update(deltaTime);
-	info_.update(frameTime);
+	_config.update(deltaTime);
+	info_.update(frameTime, _config.getState());
 }
 
 void Game::render()
@@ -86,5 +104,6 @@ void Game::render()
 	window_.clear();
 	gen_.render(window_);
 	info_.render(window_);
+	_config.render(window_);
 	window_.display();
 }

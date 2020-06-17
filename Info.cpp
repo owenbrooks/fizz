@@ -22,7 +22,7 @@ void Info::render(sf::RenderWindow& window)
 {
 	window.draw(text_);
 }
-void Info::update(float frameTime)
+void Info::update(float frameTime, const ConfigState& state)
 {
 	frame_time_buf_[frame_index_] = frameTime;
 	if (frame_index_ < frame_time_buf_.size() - 1) {
@@ -36,5 +36,9 @@ void Info::update(float frameTime)
 	float fps = 1.f / avg_frame_time;
 	std::stringstream fps_string;
 	fps_string << "fps: " << std::fixed << std::setprecision(1) << fps;
-	text_.setString(fps_string.str());
+
+	std::stringstream obj_obj_restitution_str;
+	obj_obj_restitution_str << "obj->obj: " << std::fixed << std::setprecision(2) << state.objRestitution;
+
+	text_.setString(fps_string.str() + '\n' + obj_obj_restitution_str.str());
 }

@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include "Generator.h"
 #include "Info.h"
+#include "Config.h"
 
 class Game
 {
@@ -15,5 +16,6 @@ private:
 	sf::RenderWindow window_;
 	Generator gen_;
 	Info info_;
+	Config _config;
 	sf::Font font_;
 };
