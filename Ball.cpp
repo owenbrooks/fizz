@@ -4,7 +4,7 @@ constexpr float gravity = 0.003f;
 constexpr float cor = 0.8f;
 constexpr float vel_y_threshold = 0.2f;
 
-Ball::Ball(float x, float y, int x_limit, int y_limit) : vel_(0.f, 0.f), shape_(sf::CircleShape(radius, 8)), x_limit_(x_limit), y_limit_(y_limit), init_pos_(x - radius, y - radius)
+Ball::Ball(float x, float y, int x_limit, int y_limit) : vel_(0.f, 0.f), shape_(sf::CircleShape(radius)), x_limit_(x_limit), y_limit_(y_limit), init_pos_(x - radius, y - radius)
 {
 	shape_.setPosition(x - radius, y - radius);
 	shape_.setFillColor(sf::Color::Magenta);
@@ -64,5 +64,5 @@ void Ball::setCollided(bool collided)
 }
 sf::Vector2f Ball::getPosition()
 {
-	return shape_.getPosition();
+	return shape_.getPosition() + sf::Vector2f(radius, radius);
 }

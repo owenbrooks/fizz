@@ -21,7 +21,6 @@ CollisionResult Collision::collides(Ball& obj1, Ball& obj2)
 }
 void Collision::resolve_collision(Ball& obj1, Ball& obj2, const CollisionResult& collision)
 {
-	// To add: positional correction and associated slop
 	sf::Vector2f rv = obj2.vel_ - obj1.vel_;
 	float velAlongNormal = VecTools::dot(rv, collision.unitNormal);
 	if (velAlongNormal > 0) {
@@ -31,8 +30,16 @@ void Collision::resolve_collision(Ball& obj1, Ball& obj2, const CollisionResult&
 	float e = 0.8f; // coefficient of restitution
 	constexpr float mass = 0.5f;
 	float j = -(1 + e) * velAlongNormal / (1/mass + 1/mass);
-	//j = 1.f;
 	sf::Vector2f impulse = j * collision.unitNormal;
 	obj1.vel_ -= impulse / mass;
 	obj2.vel_ += impulse / mass;
+	positional_correction(obj1, obj2, collision);
+}
+void Collision::positional_correction(Ball& obj1, Ball& obj2, const CollisionResult& collision)
+{
+	constexpr float percent = 0.8; // factor to damp or increase effect of positional correction 
+	constexpr float mass = 0.5f;
+	sf::Vector2f correction = (collision.depth / (1/mass + 1/mass)) * percent * collision.unitNormal;
+	obj1.setPosition(obj1.getPosition() - correction / mass);
+	obj2.setPosition(obj2.getPosition() + correction / mass);
 }
