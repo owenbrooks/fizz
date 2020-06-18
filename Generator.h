@@ -2,7 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
 #include "Ball.h"
-#include "Config.h";
+#include "Config.h"
 
 class Generator
 {

@@ -1,7 +1,7 @@
 #include "Game.h"
 #include <iostream>
 
-Game::Game() : window_(sf::VideoMode(800, 800), "Fizz"), gen_(sf::VideoMode::getDesktopMode().width, sf::VideoMode::getDesktopMode().height), info_(), _config()
+Game::Game() : window_(sf::VideoMode(800, 800), "Fizz"), gen_(sf::VideoMode::getDesktopMode().width, sf::VideoMode::getDesktopMode().height), info_(), config_()
 {
 	sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
 	window_.create(sf::VideoMode(desktop.width, desktop.height, desktop.bitsPerPixel), "Fizz", sf::Style::Fullscreen);
@@ -13,7 +13,7 @@ Game::Game() : window_(sf::VideoMode(800, 800), "Fizz"), gen_(sf::VideoMode::get
 	else
 	{
 		info_.setFont(font_);
-		_config.setFont(font_);
+		config_.setFont(font_);
 	}
 }
 
@@ -49,7 +49,7 @@ void Game::processEvents()
 			window_.close();
 			break;
 		case sf::Event::KeyPressed:
-			if (!_config.isActive()) {
+			if (!config_.isActive()) {
 				if (event.key.code == sf::Keyboard::Key::Q) {
 					window_.close();
 				}
@@ -64,12 +64,12 @@ void Game::processEvents()
 				}
 				else if (event.key.code == sf::Keyboard::Key::SemiColon) {
 					if (event.key.shift) {
-						_config.showCommandBox();
+						config_.showCommandBox();
 					};
 				}
 			}
 			else if (event.key.code == sf::Keyboard::Key::Enter) {
-				_config.executeCommand();
+				config_.executeCommand();
 			}
 			break;
 		case sf::Event::MouseButtonPressed:
@@ -78,14 +78,14 @@ void Game::processEvents()
 			}
 			break;
 		case sf::Event::MouseMoved:
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S) && !_config.isActive()) {
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S) && !config_.isActive()) {
 				gen_.createBallAt((float)event.mouseMove.x, (float)event.mouseMove.y);
 			}
 			break;
 		case sf::Event::TextEntered:
-			if (_config.isActive())
+			if (config_.isActive())
 			{
-				_config.handleEvent(event);
+				config_.handleEvent(event);
 			}
 			break;
 		}
@@ -94,9 +94,9 @@ void Game::processEvents()
 
 void Game::update(float deltaTime, float frameTime)
 {
-	gen_.update(deltaTime, _config.getState());
-	_config.update(deltaTime);
-	info_.update(frameTime, _config.getState(), gen_.getObjCount());
+	gen_.update(deltaTime, config_.getState());
+	config_.update();
+	info_.update(frameTime, config_.getState(), gen_.getObjCount());
 }
 
 void Game::render()
@@ -104,6 +104,6 @@ void Game::render()
 	window_.clear();
 	gen_.render(window_);
 	info_.render(window_);
-	_config.render(window_);
+	config_.render(window_);
 	window_.display();
 }

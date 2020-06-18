@@ -7,7 +7,7 @@ struct CollisionResult
 	bool collided = false;
 	sf::Vector2f contactPoint;
 	sf::Vector2f unitNormal;
-	float depth;
+	float depth = 0.f;
 };
 class Collision
 {

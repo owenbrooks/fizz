@@ -1,7 +1,8 @@
 #include "Config.h"
+#include <iostream>
 void Config::render(sf::RenderWindow& window)
 {
-	if (_active)
+	if (active_)
 	{
 		const auto windowSize = window.getSize();
 		sf::Vector2f rectSize(windowSize.x * 0.2f, 100.f);
@@ -11,84 +12,83 @@ void Config::render(sf::RenderWindow& window)
 		rectangle.setFillColor(sf::Color(250, 150, 0, 15));
 		rectangle.setOutlineThickness(5.f);
 		rectangle.setOutlineColor(sf::Color(250, 150, 100));
-		_commandText.setPosition(rectPos.x, rectPos.y + 10.f);
+		commandText_.setPosition(rectPos.x, rectPos.y + 10.f);
 
-		if (_caretVisible && _commandStr.size() <= 17) {
-			sf::RectangleShape caretRect(sf::Vector2f(rectSize.x / 17, rectSize.y));
-			const int caretIndex = _commandStr.size();
-			sf::Vector2f caretPos = rectPos + sf::Vector2f(caretIndex * rectSize.x / 17, 0.f);
+		if (caretVisible_ && commandStr_.size() < maxChars) { // don't show caret if command box is full
+			sf::RectangleShape caretRect(sf::Vector2f(rectSize.x / maxChars, rectSize.y));
+			const int caretIndex = commandStr_.size();
+			sf::Vector2f caretPos = rectPos + sf::Vector2f(caretIndex * rectSize.x / maxChars, 0.f);
 			caretRect.setPosition(caretPos);
 			caretRect.setFillColor(sf::Color(255, 255, 255, 30));
 			window.draw(caretRect);
 		}
 
 		window.draw(rectangle);
-		window.draw(_commandText);
+		window.draw(commandText_);
 	}
 }
-void Config::update(float deltaTime)
+void Config::update()
 {
-	unsigned int millis = _clock.getElapsedTime().asMilliseconds();
+	unsigned int millis = clock_.getElapsedTime().asMilliseconds();
 	if (millis > 500) {
-		_caretVisible = !_caretVisible;
-		_clock.restart();
+		caretVisible_ = !caretVisible_;
+		clock_.restart();
 	}
 }
 const ConfigState& Config::getState()
 {
-	return _state;
+	return state_;
 }
 void Config::showCommandBox()
 {
-	_active = true;
+	active_ = true;
 }
 void Config::executeCommand()
 {
 	std::string propertyName;
 	std::string newValueStr;
-	size_t pos = _commandStr.find(" ");
+	size_t pos = commandStr_.find(" ");
 	if (pos != std::string::npos) {
-		propertyName = _commandStr.substr(0, pos);
-		newValueStr = _commandStr.substr(pos + 1);
+		propertyName = commandStr_.substr(0, pos);
+		newValueStr = commandStr_.substr(pos + 1);
 		if (propertyName == "ob") {
 			try {
 				float newValue = std::stof(newValueStr);
-				_state.objRestitution = newValue;
+				state_.objRestitution = newValue;
 			}
 			catch (std::invalid_argument& e) {
-				_inErrorState = true;
+				inErrorState_ = true;
+				std::cout << e.what();
 			}
 		}
 	}
-	_active = false;
-	_commandStr.clear();
+	active_ = false;
+	commandStr_.clear();
 }
 const bool Config::isActive()
 {
-	return _active;
+	return active_;
 }
 void Config::handleEvent(sf::Event& event)
 {
 	if (event.type == sf::Event::TextEntered)
 	{
-		constexpr size_t maxChars = 17;
 		if (event.text.unicode == '\b') {
-			if (_commandStr.size() > 0) { 
-				_commandStr.pop_back();
+			if (commandStr_.size() > 0) { 
+				commandStr_.pop_back();
 			}
-
 		}
-		else if (_commandStr.size() < maxChars && event.text.unicode != ':') {
-			_commandStr += static_cast<char>(event.text.unicode);
+		else if (commandStr_.size() < maxChars && event.text.unicode != ':') {
+			commandStr_ += static_cast<char>(event.text.unicode);
 		}
-		_commandText.setString(_commandStr);
+		commandText_.setString(commandStr_);
 	}
 }
 void Config::setFont(sf::Font& font)
 {
-	_commandText.setFont(font);
-	_commandText.setCharacterSize(50);
-	_commandText.setFillColor(sf::Color::White);
-	_commandText.setOutlineColor(sf::Color::White);
+	commandText_.setFont(font);
+	commandText_.setCharacterSize(50);
+	commandText_.setFillColor(sf::Color::White);
+	commandText_.setOutlineColor(sf::Color::White);
 }
 

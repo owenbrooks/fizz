@@ -37,7 +37,7 @@ void Collision::resolve_collision(Ball& obj1, Ball& obj2, const CollisionResult&
 }
 void Collision::positional_correction(Ball& obj1, Ball& obj2, const CollisionResult& collision)
 {
-	constexpr float percent = 0.8; // factor to damp or increase effect of positional correction 
+	constexpr float percent = 0.8f; // factor to damp or increase effect of positional correction 
 	constexpr float mass = 0.5f;
 	sf::Vector2f correction = (collision.depth / (1/mass + 1/mass)) * percent * collision.unitNormal;
 	obj1.setPosition(obj1.getPosition() - correction / mass);

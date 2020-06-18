@@ -16,6 +16,6 @@ private:
 	sf::RenderWindow window_;
 	Generator gen_;
 	Info info_;
-	Config _config;
+	Config config_;
 	sf::Font font_;
 };

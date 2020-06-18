@@ -1,7 +1,8 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-constexpr float defaultObjRestitution = 0.8;
-constexpr float defaultBoundaryResitution = 0.8;
+constexpr float defaultObjRestitution = 0.8f;
+constexpr float defaultBoundaryResitution = 0.8f;
+constexpr size_t maxChars = 17;
 struct ConfigState
 {
 	float objRestitution = defaultObjRestitution;
@@ -17,17 +18,17 @@ public:
 	const ConfigState& getState();
 	void handleEvent(sf::Event& event);
 	void setFont(sf::Font& font);
-	void update(float deltaTime);
+	void update();
 private:
-	bool _active = false;
-	sf::RenderWindow _window;
-	ConfigState _state;
-	std::string _commandStr;
-	sf::Text _commandText;
-	sf::RectangleShape _caretRect;
-	bool _caretVisible = true;
-	size_t _caretIndex;
-	sf::Clock _clock;
-	bool _inErrorState = false;
+	bool active_ = false;
+	sf::RenderWindow window_;
+	ConfigState state_;
+	std::string commandStr_;
+	sf::Text commandText_;
+	sf::RectangleShape caretRect_;
+	bool caretVisible_ = true;
+	size_t caretIndex_ = 0;
+	sf::Clock clock_;
+	bool inErrorState_ = false;
 };
 
