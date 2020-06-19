@@ -1,10 +1,8 @@
 #include "Ball.h"
 
-constexpr float gravity = 0.003f;
-constexpr float cor = 0.8f;
 constexpr float vel_y_threshold = 0.2f;
 
-Ball::Ball(float x, float y, int x_limit, int y_limit) : vel_(0.f, 0.f), shape_(sf::CircleShape(radius)), x_limit_(x_limit), y_limit_(y_limit), init_pos_(x - radius, y - radius)
+Ball::Ball(float x, float y, int x_limit, int y_limit, float radius) : vel_(0.f, 0.f), shape_(sf::CircleShape(radius)), x_limit_(x_limit), y_limit_(y_limit), init_pos_(x - radius, y - radius), radius(radius)
 {
 	shape_.setPosition(x - radius, y - radius);
 	shape_.setFillColor(sf::Color::Magenta);
@@ -13,8 +11,10 @@ void Ball::render(sf::RenderWindow& window)
 {
 	window.draw(shape_);
 }
-void Ball::update(float deltaTime)
+void Ball::update(float deltaTime, const ConfigState& config)
 {
+	const float gravity = config.gravity;
+	const float cor = config.boundaryRestitution;
 	// check collision status
 	if (shape_.getPosition().y + 2*radius < y_limit_ || vel_.y < 0) {
 		sf::Vector2f accel(0.f, gravity);

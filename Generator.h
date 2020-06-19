@@ -8,7 +8,7 @@ class Generator
 {
 public:
 	Generator(int x_limit, int y_limit);
-	void createBallAt(float x, float y);
+	void createBallAt(float x, float y, float radius);
 	void render(sf::RenderWindow& window);
 	void update(float frameTime, const ConfigState& state);
 	void clear();

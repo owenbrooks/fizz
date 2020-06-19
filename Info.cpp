@@ -41,6 +41,21 @@ void Info::update(float frameTime, const ConfigState& state, unsigned int obj_co
 
 	std::stringstream obj_obj_restitution_str;
 	obj_obj_restitution_str << "obj->obj: " << std::fixed << std::setprecision(2) << state.objRestitution;
+	
+	std::stringstream obj_bound_restitution_str;
+	obj_bound_restitution_str << "obj->bndry: " << std::fixed << std::setprecision(2) << state.boundaryRestitution;
 
-	text_.setString(obj_count_str + '\n' + fps_string.str() + '\n' + obj_obj_restitution_str.str());
+	std::stringstream gravity_str;
+	gravity_str << "gravity: " << std::fixed << std::setprecision(8) << state.gravity;
+
+	std::stringstream obj_radius;
+	obj_radius << "radius: " << std::fixed << std::setprecision(2) << state.ballRadius;
+
+	text_.setString(obj_count_str + '\n' + 
+		fps_string.str() + '\n' + 
+		obj_obj_restitution_str.str() + '\n' + 
+		obj_bound_restitution_str.str() + '\n' +
+		gravity_str.str() + '\n' +
+		obj_radius.str()
+	);
 }

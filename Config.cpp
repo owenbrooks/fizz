@@ -51,15 +51,24 @@ void Config::executeCommand()
 	if (pos != std::string::npos) {
 		propertyName = commandStr_.substr(0, pos);
 		newValueStr = commandStr_.substr(pos + 1);
-		if (propertyName == "ob") {
-			try {
-				float newValue = std::stof(newValueStr);
+		try {
+			float newValue = std::stof(newValueStr);
+			if (propertyName == "ob") {
 				state_.objRestitution = newValue;
 			}
-			catch (std::invalid_argument& e) {
-				inErrorState_ = true;
-				std::cout << e.what();
+			else if (propertyName == "g") {
+				state_.gravity = newValue;
 			}
+			else if (propertyName == "bo") {
+				state_.boundaryRestitution = newValue;
+			}
+			else if (propertyName == "rad") {
+				state_.ballRadius = newValue;
+			}
+		}
+		catch (std::invalid_argument& e) {
+			inErrorState_ = true;
+			std::cout << e.what();
 		}
 	}
 	active_ = false;

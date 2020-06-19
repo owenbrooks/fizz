@@ -2,11 +2,15 @@
 #include <SFML/Graphics.hpp>
 constexpr float defaultObjRestitution = 0.8f;
 constexpr float defaultBoundaryResitution = 0.8f;
+constexpr float defaultGravity = 0.003f;
+constexpr float defaultBallRadius = 25.f;
 constexpr size_t maxChars = 17;
 struct ConfigState
 {
 	float objRestitution = defaultObjRestitution;
 	float boundaryRestitution = defaultBoundaryResitution;
+	float gravity = defaultGravity;
+	float ballRadius = defaultBallRadius;
 };
 class Config
 {
