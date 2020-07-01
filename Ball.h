@@ -2,6 +2,9 @@
 #include <SFML/Graphics.hpp>
 #include "Config.h"
 
+const sf::Color ballColors[] = { sf::Color::Magenta, sf::Color::Yellow, sf::Color::White, sf::Color::Green, sf::Color::Red,
+sf::Color::Blue, sf::Color::Cyan };
+
 class Ball
 {
 public:
@@ -21,5 +24,6 @@ private:
 	int y_limit_;
 	int x_limit_;
 	sf::Vector2f init_pos_;
+	static unsigned int colorIndex;
 };
 
