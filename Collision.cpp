@@ -6,7 +6,7 @@ CollisionResult Collision::collides(Ball& obj1, Ball& obj2)
 {
 	CollisionResult result;
 	sf::Vector2f normal = obj2.getPosition() - obj1.getPosition();
-	if (normal.x*normal.x + normal.y*normal.y <= obj1.radius*obj1.radius*4) { // assuming equal radius for now
+	if (normal.x*normal.x + normal.y*normal.y <= obj1.radius*obj1.radius + 2*obj1.radius*obj2.radius + obj2.radius*obj2.radius) { 
 		result.collided = true;
 	}
 	else {
