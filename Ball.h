@@ -8,7 +8,7 @@ sf::Color::Blue, sf::Color::Cyan };
 class Ball
 {
 public:
-	Ball(float x, float y, int x_limit, int y_limit, float radius);
+	Ball(float x, float y, int x_limit, int y_limit, float radius, sf::Shape* shape);
 	void render(sf::RenderWindow& window);
 	void update(float deltaTime, const ConfigState& config);
 	void setPosition(sf::Vector2<float> newPos);
@@ -20,7 +20,7 @@ public:
 	sf::Vector2f vel_;
 private:
 	sf::Vector2f pos_;
-	sf::CircleShape shape_;
+	sf::Shape* shape_;
 	int y_limit_;
 	int x_limit_;
 	sf::Vector2f init_pos_;

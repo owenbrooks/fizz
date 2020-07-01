@@ -18,6 +18,7 @@ public:
 private:
 	std::vector<Ball> instances_;
 	std::vector<Ball> prev_instances_;
+	std::vector<std::unique_ptr<sf::Shape>> shapes_;
 	int x_limit_;
 	int y_limit_;
 	bool paused_;

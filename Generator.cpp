@@ -7,7 +7,8 @@ Generator::Generator(int x_limit, int y_limit) : x_limit_(x_limit), y_limit_(y_l
 }
 void Generator::createBallAt(float x, float y, float radius)
 {
-	Ball newBall = Ball(x, y, x_limit_, y_limit_, radius);
+	shapes_.push_back(std::make_unique<sf::CircleShape>(radius));
+	Ball newBall = Ball(x, y, x_limit_, y_limit_, radius, shapes_.back().get());
 	instances_.push_back(newBall);
 	if (instances_.size() > 1000) {
 		instances_.erase(instances_.begin());
