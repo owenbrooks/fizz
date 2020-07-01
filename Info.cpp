@@ -20,7 +20,13 @@ void Info::setFont(sf::Font& font)
 }
 void Info::render(sf::RenderWindow& window)
 {
-	window.draw(text_);
+	if (!hidden_) {
+		window.draw(text_);
+	}
+}
+void Info::toggleHidden() 
+{
+	hidden_ = !hidden_;
 }
 void Info::update(float frameTime, const ConfigState& state, unsigned int obj_count)
 {
@@ -51,11 +57,11 @@ void Info::update(float frameTime, const ConfigState& state, unsigned int obj_co
 	std::stringstream obj_radius;
 	obj_radius << "radius: " << std::fixed << std::setprecision(2) << state.ballRadius;
 
-	text_.setString(obj_count_str + '\n' + 
+	/*text_.setString(obj_count_str + '\n' + 
 		fps_string.str() + '\n' + 
 		obj_obj_restitution_str.str() + '\n' + 
 		obj_bound_restitution_str.str() + '\n' +
 		gravity_str.str() + '\n' +
 		obj_radius.str()
-	);
+	);*/
 }

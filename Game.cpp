@@ -62,6 +62,9 @@ void Game::processEvents()
 				else if (event.key.code == sf::Keyboard::Key::P) {
 					gen_.togglePaused();
 				}
+				else if (event.key.code == sf::Keyboard::Key::H) {
+					info_.toggleHidden();
+				}
 				else if (event.key.code == sf::Keyboard::Key::SemiColon) {
 					if (event.key.shift) {
 						config_.showCommandBox();
