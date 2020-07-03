@@ -163,7 +163,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AABB.cpp" />
     <ClCompile Include="Ball.cpp" />
+    <ClCompile Include="BroadPhase.cpp" />
     <ClCompile Include="Collision.cpp" />
     <ClCompile Include="Config.cpp" />
     <ClCompile Include="Fizz.cpp" />
@@ -173,7 +175,9 @@
     <ClCompile Include="VecTools.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AABB.h" />
     <ClInclude Include="Ball.h" />
+    <ClInclude Include="BroadPhase.h" />
     <ClInclude Include="Collision.h" />
     <ClInclude Include="Config.h" />
     <ClInclude Include="Generator.h" />

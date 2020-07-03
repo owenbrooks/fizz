@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "Config.h"
+#include "AABB.h"
 
 const sf::Color ballColors[] = { sf::Color::Magenta, sf::Color::Yellow, sf::Color::White, sf::Color::Green, sf::Color::Red,
 sf::Color::Blue, sf::Color::Cyan };
@@ -18,6 +19,7 @@ public:
 	void setCollided(bool);
 	float radius = 25.f;
 	sf::Vector2f vel_;
+	const AABB getAABB() const;
 private:
 	sf::Vector2f pos_;
 	sf::Shape* shape_;
@@ -25,5 +27,6 @@ private:
 	int x_limit_;
 	sf::Vector2f init_pos_;
 	static unsigned int colorIndex;
+	void move(sf::Vector2f vec);
 };
 

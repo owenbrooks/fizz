@@ -2,6 +2,8 @@
 #include "Collision.h"
 #include <cmath>
 #include "VecTools.h"
+#include "BroadPhase.h"
+#include <iostream>
 Generator::Generator(int x_limit, int y_limit) : x_limit_(x_limit), y_limit_(y_limit), instances_(), paused_(false)
 {
 }
@@ -26,16 +28,24 @@ void Generator::update(float deltaTime, const ConfigState& config)
 		return;
 	}
 	if (instances_.size() > 1) {
-		for (auto it_a = instances_.begin(); it_a != instances_.end() - 1; it_a++) {
-			for (auto it_b = it_a + 1; it_b != instances_.end(); it_b++) {
-				const CollisionResult collision_res = Collision::collides(*it_a, *it_b);
-				//(*it_a).setCollided(collision_res.collided);
-				//(*it_b).setCollided(collision_res.collided);
-				if (collision_res.collided) {
-					Collision::resolve_collision(*it_a, *it_b, collision_res, config);
-				}
+		auto pairs = BroadPhase::sweep_and_prune(instances_);
+		for (auto pair : pairs) {
+			const CollisionResult collision_res = Collision::collides(instances_[pair.first], instances_[pair.second]);
+			if (collision_res.collided) {
+				Collision::resolve_collision(instances_[pair.first], instances_[pair.second], collision_res, config);
 			}
 		}
+		
+		//for (auto it_a = instances_.begin(); it_a != instances_.end() - 1; ++it_a) {
+		//	for (auto it_b = it_a + 1; it_b != instances_.end(); ++it_b) {
+		//		const CollisionResult collision_res = Collision::collides(*it_a, *it_b);
+		//		//(*it_a).setCollided(collision_res.collided);
+		//		//(*it_b).setCollided(collision_res.collided);
+		//		if (collision_res.collided) {
+		//			Collision::resolve_collision(*it_a, *it_b, collision_res, config);
+		//		}
+		//	}
+		//}
 	}
 	for (auto& inst : instances_) {
 		inst.update(deltaTime, config);
