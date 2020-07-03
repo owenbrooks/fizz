@@ -30,7 +30,7 @@ void Info::toggleHidden()
 }
 void Info::update(float frameTime, const ConfigState& state, unsigned int obj_count)
 {
-	std::string obj_count_str = "obj count: " + std::to_string(obj_count);
+	/*std::string obj_count_str = "obj count: " + std::to_string(obj_count);
 
 	frame_time_buf_[frame_index_] = frameTime;
 	if (frame_index_ < frame_time_buf_.size() - 1) {

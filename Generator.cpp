@@ -30,9 +30,9 @@ void Generator::update(float deltaTime, const ConfigState& config)
 	if (instances_.size() > 1) {
 		auto pairs = BroadPhase::sweep_and_prune(instances_);
 		for (auto pair : pairs) {
-			const CollisionResult collision_res = Collision::collides(instances_[pair.first], instances_[pair.second]);
+			const CollisionResult collision_res = Collision::collides(*pair.first, *pair.second);
 			if (collision_res.collided) {
-				Collision::resolve_collision(instances_[pair.first], instances_[pair.second], collision_res, config);
+				Collision::resolve_collision(*pair.first, *pair.second, collision_res, config);
 			}
 		}
 		
