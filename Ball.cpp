@@ -3,7 +3,7 @@
 constexpr float vel_y_threshold = 0.2f;
 unsigned int Ball::colorIndex = 0;
 
-Ball::Ball(float x, float y, int x_limit, int y_limit, float radius, sf::Shape* shape) : pos_(x, y), vel_(0.f, 0.f), shape_(shape), x_limit_(x_limit), y_limit_(y_limit), init_pos_(x, y), radius(radius)
+Ball::Ball(float x, float y, int x_limit, int y_limit, float radius, sf::Shape* shape) : pos_(x, y), vel_(0.f, 0.f), shape_(shape), x_limit_(x_limit), y_limit_(y_limit), init_pos_(x, y), radius(radius), inv_mass(radius*radius*density)
 {
 	shape_->setPosition(x - radius, y - radius);
 	shape_->setFillColor(ballColors[colorIndex%7]);

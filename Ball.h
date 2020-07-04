@@ -5,6 +5,7 @@
 
 const sf::Color ballColors[] = { sf::Color::Magenta, sf::Color::Yellow, sf::Color::White, sf::Color::Green, sf::Color::Red,
 sf::Color::Blue, sf::Color::Cyan };
+constexpr float density = 0.005;
 
 class Ball
 {
@@ -18,6 +19,7 @@ public:
 	void reset();
 	void setCollided(bool);
 	float radius = 25.f;
+	float inv_mass;
 	sf::Vector2f vel_;
 	const AABB getAABB() const;
 private:
