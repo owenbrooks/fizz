@@ -3,10 +3,10 @@
 constexpr float vel_y_threshold = 0.2f;
 unsigned int Ball::colorIndex = 0;
 
-Ball::Ball(float x, float y, int x_limit, int y_limit, float radius, sf::Shape* shape) : pos_(x, y), vel_(0.f, 0.f), shape_(shape), x_limit_(x_limit), y_limit_(y_limit), init_pos_(x, y), radius(radius), inv_mass(radius*radius*density)
+Ball::Ball(float x, float y, int x_limit, int y_limit, float radius, sf::Shape* shape) : pos_(x, y), vel_(0.f, 0.f), shape_(shape), x_limit_(x_limit), y_limit_(y_limit), init_pos_(x, y), radius(radius), inv_mass(radius* radius* density)
 {
 	shape_->setPosition(x - radius, y - radius);
-	shape_->setFillColor(ballColors[colorIndex%7]);
+	shape_->setFillColor(ballColors[colorIndex % 7]);
 	colorIndex++;
 }
 void Ball::render(sf::RenderWindow& window)
@@ -26,13 +26,16 @@ void Ball::update(float deltaTime, const ConfigState& config)
 {
 	const float gravity = config.gravity;
 	const float cor = config.boundaryRestitution;
-	// check collision status
-	if (pos_.y + radius < y_limit_ || vel_.y < 0) {
+
+	// acceleration due to gravity
+	if (config.gravityEnabled)
+	{
 		sf::Vector2f accel(0.f, gravity);
 		vel_ += accel * deltaTime;
-		move(vel_* deltaTime);
 	}
-	else { // collision with ground
+
+	// check collision status
+	if (pos_.y + radius > y_limit_ && vel_.y > 0) { // ground collision
 		setPosition(sf::Vector2f(pos_.x, y_limit_ - radius));
 		if (vel_.y > vel_y_threshold) {
 			vel_.y = -cor * vel_.y;
@@ -40,7 +43,10 @@ void Ball::update(float deltaTime, const ConfigState& config)
 		else {
 			vel_.y = 0;
 		}
-		move(vel_ * deltaTime);
+	}
+	else if (config.topWallEnabled && pos_.y - radius < 0 && vel_.y < 0) { // top wall collision
+		setPosition(sf::Vector2f(pos_.x, radius));
+		vel_.y = -cor * vel_.y;
 	}
 	if (pos_.x + radius > x_limit_) { // right wall collision
 		setPosition(sf::Vector2f(x_limit_ - radius, pos_.y));
@@ -50,13 +56,15 @@ void Ball::update(float deltaTime, const ConfigState& config)
 		setPosition(sf::Vector2f(radius, pos_.y));
 		vel_.x = -cor * vel_.x;
 	}
+
+	move(vel_ * deltaTime);
 }
 void Ball::move(sf::Vector2f vec)
 {
 	pos_ += vec;
 	shape_->move(vec);
 }
-void Ball::setPosition(sf::Vector2<float> newPos) 
+void Ball::setPosition(sf::Vector2<float> newPos)
 {
 	pos_ = newPos;
 	shape_->setPosition(newPos.x - radius, newPos.y - radius);

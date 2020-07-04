@@ -65,6 +65,12 @@ void Game::processEvents()
 				else if (event.key.code == sf::Keyboard::Key::H) {
 					info_.toggleHidden();
 				}
+				else if (event.key.code == sf::Keyboard::Key::G) {
+					config_.toggleGravity();
+				}
+				else if (event.key.code == sf::Keyboard::Key::T) {
+					config_.toggleTopWall();
+				}
 				else if (event.key.code == sf::Keyboard::Key::SemiColon) {
 					if (event.key.shift) {
 						config_.showCommandBox();
@@ -97,9 +103,10 @@ void Game::processEvents()
 
 void Game::update(float deltaTime, float frameTime)
 {
-	gen_.update(deltaTime, config_.getState());
+	ConfigState currConfig = config_.getState();
+	gen_.update(deltaTime, currConfig);
 	config_.update();
-	info_.update(frameTime, config_.getState(), gen_.getObjCount());
+	info_.update(frameTime, currConfig, gen_.getObjCount());
 }
 
 void Game::render()

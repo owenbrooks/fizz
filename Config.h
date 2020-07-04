@@ -11,6 +11,8 @@ struct ConfigState
 	float boundaryRestitution = defaultBoundaryResitution;
 	float gravity = defaultGravity;
 	float ballRadius = defaultBallRadius;
+	bool gravityEnabled = true;
+	bool topWallEnabled = false;
 };
 class Config
 {
@@ -23,6 +25,8 @@ public:
 	void handleEvent(sf::Event& event);
 	void setFont(sf::Font& font);
 	void update();
+	inline void toggleGravity() { state_.gravityEnabled = !state_.gravityEnabled; };
+	inline void toggleTopWall() { state_.topWallEnabled = !state_.topWallEnabled; };
 private:
 	bool active_ = false;
 	sf::RenderWindow window_;

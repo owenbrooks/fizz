@@ -5,7 +5,7 @@
 
 const sf::Color ballColors[] = { sf::Color::Magenta, sf::Color::Yellow, sf::Color::White, sf::Color::Green, sf::Color::Red,
 sf::Color::Blue, sf::Color::Cyan };
-constexpr float density = 0.005;
+constexpr float density = 0.005f;
 
 class Ball
 {
