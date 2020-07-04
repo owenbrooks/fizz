@@ -3,14 +3,12 @@
 #include "Config.h"
 #include "AABB.h"
 
-const sf::Color ballColors[] = { sf::Color::Magenta, sf::Color::Yellow, sf::Color::White, sf::Color::Green, sf::Color::Red,
-sf::Color::Blue, sf::Color::Cyan };
 constexpr float density = 0.005f;
 
 class Ball
 {
 public:
-	Ball(float x, float y, int x_limit, int y_limit, float radius, sf::Shape* shape);
+	Ball(float x, float y, int x_limit, int y_limit, float radius, sf::Vector2f initialVel, sf::Shape* shape, sf::Color color);
 	void render(sf::RenderWindow& window);
 	void update(float deltaTime, const ConfigState& config);
 	void setPosition(sf::Vector2<float> newPos);
@@ -28,7 +26,6 @@ private:
 	int y_limit_;
 	int x_limit_;
 	sf::Vector2f init_pos_;
-	static unsigned int colorIndex;
 	void move(sf::Vector2f vec);
 };
 

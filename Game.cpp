@@ -1,7 +1,7 @@
 #include "Game.h"
 #include <iostream>
 
-Game::Game() : window_(sf::VideoMode(800, 800), "Fizz"), gen_(sf::VideoMode::getDesktopMode().width, sf::VideoMode::getDesktopMode().height), info_(), config_()
+Game::Game() : config_(), window_(sf::VideoMode(800, 800), "Fizz"), gen_(sf::VideoMode::getDesktopMode().width, sf::VideoMode::getDesktopMode().height, config_.getState()), info_()
 {
 	sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
 	window_.create(sf::VideoMode(desktop.width, desktop.height, desktop.bitsPerPixel), "Fizz", sf::Style::Fullscreen);
@@ -71,6 +71,9 @@ void Game::processEvents()
 				else if (event.key.code == sf::Keyboard::Key::T) {
 					config_.toggleTopWall();
 				}
+				else if (event.key.code == sf::Keyboard::Key::F) {
+					gen_.toggleFireMode();
+				}
 				else if (event.key.code == sf::Keyboard::Key::SemiColon) {
 					if (event.key.shift) {
 						config_.showCommandBox();
@@ -83,7 +86,7 @@ void Game::processEvents()
 			break;
 		case sf::Event::MouseButtonPressed:
 			if (event.mouseButton.button == sf::Mouse::Left) {
-				gen_.createBallAt((float)event.mouseButton.x, (float)event.mouseButton.y, config_.getState().ballRadius);
+					gen_.handleMouseEvent(event);
 			}
 			break;
 		case sf::Event::MouseMoved:

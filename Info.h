@@ -17,6 +17,6 @@ private:
 	size_t frame_index_;
 	sf::Font font_;
 	sf::Text text_;
-	bool hidden_ = false;
+	bool hidden_ = true;
 };
 

@@ -13,9 +13,10 @@ private:
 	void processEvents();
 	void update(float deltaTime, float frameTime);
 	void render();
+	Config config_;
 	sf::RenderWindow window_;
 	Generator gen_;
 	Info info_;
-	Config config_;
 	sf::Font font_;
+	bool inFireMode_ = true;
 };

@@ -11,8 +11,8 @@ struct ConfigState
 	float boundaryRestitution = defaultBoundaryResitution;
 	float gravity = defaultGravity;
 	float ballRadius = defaultBallRadius;
-	bool gravityEnabled = true;
-	bool topWallEnabled = false;
+	bool gravityEnabled = false;
+	bool topWallEnabled = true;
 };
 class Config
 {
