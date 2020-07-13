@@ -6,17 +6,17 @@
 #include <iostream>   
 constexpr size_t max_objs = 10000;
 constexpr auto PI = 3.14159265358979323846f;
-Generator::Generator(int x_limit, int y_limit, const ConfigState& config) : config_(config), new_obj_(config.ballRadius), x_limit_(x_limit), y_limit_(y_limit), instances_(), paused_(false), color_index_(0)
+Generator::Generator(int x_limit, int y_limit, const ConfigState& config) : config_(config), new_obj_(config.ballRadius), boundary_limits_(x_limit, y_limit), instances_(), paused_(false), color_index_(0)
 {
 }
-void Generator::createBallAt(float x, float y, float radius)
+void Generator::createBallAt(sf::Vector2f pos, float radius)
 {
-	createBallAt(x, y, radius, sf::Vector2f(0.f, 0.f));
+	createBallAt(pos, radius, sf::Vector2f(0.f, 0.f));
 }
-void Generator::createBallAt(float x, float y, float radius, sf::Vector2f initialVel)
+void Generator::createBallAt(sf::Vector2f pos, float radius, sf::Vector2f initialVel)
 {
 	shapes_.push_back(std::make_unique<sf::CircleShape>(radius));
-	Ball newBall = Ball(x, y, x_limit_, y_limit_, radius, initialVel, shapes_.back().get(), ballColors[color_index_ % 7]);
+	Ball newBall = Ball(pos, boundary_limits_, radius, initialVel, shapes_.back().get(), ballColors[color_index_ % 7]);
 	color_index_++;
 	instances_.push_back(newBall);
 	if (instances_.size() > max_objs) {
@@ -84,7 +84,7 @@ void Generator::handleMouseEvent(const sf::Event& event)
 				}
 			}
 			else {
-				createBallAt((float)event.mouseButton.x, (float)event.mouseButton.y, config_.ballRadius);
+				createBallAt(sf::Vector2f((float)event.mouseButton.x, (float)event.mouseButton.y), config_.ballRadius);
 			}
 		}
 		break;
@@ -114,8 +114,8 @@ void Generator::fire()
 	sf::Vector2f mousePos = static_cast<sf::Vector2f>(sf::Mouse::getPosition());
 	sf::Vector2f difference = new_obj_.getPosition() + sf::Vector2f(config_.ballRadius, config_.ballRadius) - mousePos;
 	sf::Vector2f initialVel = difference * 0.005f;
-
-	createBallAt(new_obj_.getPosition().x + config_.ballRadius, new_obj_.getPosition().y + config_.ballRadius, config_.ballRadius, initialVel);
+	const auto newPos = new_obj_.getPosition() + sf::Vector2f(config_.ballRadius, config_.ballRadius);
+	createBallAt(newPos, config_.ballRadius, initialVel);
 }
 void Generator::clear()
 {

@@ -2,15 +2,16 @@
 
 constexpr float vel_y_threshold = 0.2f;
 
-Ball::Ball(float x, float y, int x_limit, int y_limit, float radius, sf::Vector2f initialVel, sf::Shape* shape, sf::Color color) : pos_(x, y), vel_(initialVel), shape_(shape), x_limit_(x_limit), y_limit_(y_limit), init_pos_(x, y), radius(radius), inv_mass(radius* radius* density)
+Ball::Ball(sf::Vector2f initial_pos, sf::Vector2f boundary_limits, float radius, sf::Vector2f initial_vel, sf::Shape* shape, sf::Color color) : pos_(initial_pos), vel_(initial_vel), shape_(shape), x_limit_(boundary_limits.x), y_limit_(boundary_limits.y), init_pos_(initial_pos), radius(radius), inv_mass(radius* radius* density)
 {
-	shape_->setPosition(x - radius, y - radius);
+	shape_->setPosition(initial_pos.x - radius, initial_pos.y - radius);
 	shape_->setFillColor(color);
 }
 void Ball::render(sf::RenderWindow& window)
 {
 	window.draw(*shape_);
 
+	// Uncomment to draw bounding boxes for shapes
 	//sf::RectangleShape boundingBoxRect(sf::Vector2f(2*radius, 2*radius));
 	//AABB boundingBox = getAABB();
 	////boundingBoxRect.setPosition(pos_ - sf::Vector2f(radius, radius));

@@ -91,7 +91,7 @@ void Game::processEvents()
 			break;
 		case sf::Event::MouseMoved:
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S) && !config_.isActive()) {
-				gen_.createBallAt((float)event.mouseMove.x, (float)event.mouseMove.y, config_.getState().ballRadius);
+				gen_.createBallAt(sf::Vector2f((float)event.mouseMove.x, (float)event.mouseMove.y), config_.getState().ballRadius);
 			}
 			break;
 		case sf::Event::TextEntered:

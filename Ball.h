@@ -8,7 +8,7 @@ constexpr float density = 0.005f;
 class Ball
 {
 public:
-	Ball(float x, float y, int x_limit, int y_limit, float radius, sf::Vector2f initialVel, sf::Shape* shape, sf::Color color);
+	Ball(sf::Vector2f initial_pos, sf::Vector2f boundary_limits, float radius, sf::Vector2f initial_vel, sf::Shape* shape, sf::Color color);
 	void render(sf::RenderWindow& window);
 	void update(float deltaTime, const ConfigState& config);
 	void setPosition(sf::Vector2<float> newPos);
