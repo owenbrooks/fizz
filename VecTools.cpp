@@ -1,6 +1,7 @@
 #include "VecTools.h"
 #include <cmath>
 
+// Collection of common vector calculations
 float VecTools::magnitude(sf::Vector2f v)
 {
 	return std::sqrt(v.x * v.x + v.y * v.y);

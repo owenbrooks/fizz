@@ -6,7 +6,7 @@
 #include <iostream>   
 constexpr size_t max_objs = 10000;
 constexpr auto PI = 3.14159265358979323846f;
-Generator::Generator(int x_limit, int y_limit, const ConfigState& config) : config_(config), new_obj_(config.ballRadius), boundary_limits_(x_limit, y_limit), instances_(), paused_(false), color_index_(0)
+Generator::Generator(int x_limit, int y_limit, const ConfigState& config) : config_(config), new_obj_(config.ballRadius), boundary_limits_((float)x_limit, (float)y_limit), instances_(), paused_(false), color_index_(0)
 {
 }
 void Generator::createBallAt(sf::Vector2f pos, float radius)

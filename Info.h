@@ -18,5 +18,6 @@ private:
 	sf::Font font_;
 	sf::Text text_;
 	bool hidden_ = true;
+	float time_since_last_update = 0;
 };
 

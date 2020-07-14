@@ -163,7 +163,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="AABB.cpp" />
     <ClCompile Include="Ball.cpp" />
     <ClCompile Include="BroadPhase.cpp" />
     <ClCompile Include="Collision.cpp" />

@@ -1,5 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+
+// Collection of common vector calculations
 namespace VecTools
 {
 	float magnitude(sf::Vector2f v);

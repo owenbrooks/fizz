@@ -39,9 +39,6 @@
     <ClCompile Include="Config.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AABB.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="BroadPhase.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
