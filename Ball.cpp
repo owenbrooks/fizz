@@ -2,7 +2,7 @@
 
 constexpr float vel_y_threshold = 0.2f;
 
-Ball::Ball(sf::Vector2f initial_pos, sf::Vector2f boundary_limits, float radius, sf::Vector2f initial_vel, sf::Shape* shape, sf::Color color) : pos_(initial_pos), vel_(initial_vel), shape_(shape), x_limit_(boundary_limits.x), y_limit_(boundary_limits.y), init_pos_(initial_pos), radius(radius), inv_mass(radius* radius* density)
+Ball::Ball(sf::Vector2f initial_pos, sf::Vector2f boundary_limits, float radius, sf::Vector2f initial_vel, sf::Shape* shape, sf::Color color) : radius(radius), inv_mass(radius* radius* density), vel_(initial_vel), pos_(initial_pos), init_pos_(initial_pos), shape_(shape), x_limit_(boundary_limits.x), y_limit_(boundary_limits.y)
 {
 	shape_->setPosition(initial_pos.x - radius, initial_pos.y - radius);
 	shape_->setFillColor(color);

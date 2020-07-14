@@ -16,16 +16,16 @@ public:
 	void setVelocity(sf::Vector2f newVel);
 	void reset();
 	void setCollided(bool);
+	const AABB getAABB() const;
 	float radius = 25.f;
 	float inv_mass;
 	sf::Vector2f vel_;
-	const AABB getAABB() const;
 private:
-	sf::Vector2f pos_;
-	sf::Shape* shape_;
-	int y_limit_;
-	int x_limit_;
-	sf::Vector2f init_pos_;
 	void move(sf::Vector2f vec);
+	sf::Vector2f pos_;
+	sf::Vector2f init_pos_;
+	sf::Shape* shape_;
+	int x_limit_;
+	int y_limit_;
 };
 

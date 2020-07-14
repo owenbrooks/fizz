@@ -67,7 +67,6 @@ void Config::executeCommand()
 			}
 		}
 		catch (std::invalid_argument& e) {
-			inErrorState_ = true;
 			std::cout << e.what();
 		}
 	}

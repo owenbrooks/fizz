@@ -18,25 +18,24 @@ class Config
 {
 public:
 	void render(sf::RenderWindow& window);
-	void showCommandBox();
-	void executeCommand();
-	const bool isActive();
+	void update();
 	const ConfigState& getState();
 	void handleEvent(sf::Event& event);
 	void setFont(sf::Font& font);
-	void update();
+	const bool isActive();
+	void showCommandBox();
+	void executeCommand();
 	inline void toggleGravity() { state_.gravityEnabled = !state_.gravityEnabled; };
 	inline void toggleTopWall() { state_.topWallEnabled = !state_.topWallEnabled; };
 private:
-	bool active_ = false;
 	sf::RenderWindow window_;
 	ConfigState state_;
+	sf::Clock clock_;
+	bool active_ = false;
 	std::string commandStr_;
 	sf::Text commandText_;
 	sf::RectangleShape caretRect_;
 	bool caretVisible_ = true;
 	size_t caretIndex_ = 0;
-	sf::Clock clock_;
-	bool inErrorState_ = false;
 };
 

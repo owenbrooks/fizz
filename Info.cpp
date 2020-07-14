@@ -5,7 +5,7 @@
 #include <sstream>
 #include <iomanip>
 
-Info::Info() : font_(), text_(), frame_index_(0),
+Info::Info() : font_(), text_(), 
 frame_time_buf_({ 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f })
 {
 }
