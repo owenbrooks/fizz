@@ -1,3 +1,7 @@
+// Performs narrow-phase collision detection and resolution on the circular objects. 
+// This narrow-phase collision detection should be applied only to the candidates marked out by
+// the broad-phase detection, as the narrow-phase algorithm will be slower.
+// Collision resolution involves both an impulse delta and then positional correction.
 #include "Collision.h"
 #include "VecTools.h"
 #include <cmath>

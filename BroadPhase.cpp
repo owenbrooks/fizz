@@ -1,3 +1,4 @@
+// Performs "broad-phase" collision detection using the sweep and prune algorithm
 #include "BroadPhase.h"
 #include "AABB.h"
 #include <numeric>

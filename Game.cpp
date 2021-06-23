@@ -1,3 +1,4 @@
+// This file contains the main game loop, window setup and processing of events (e.g. mouse clicks, key presses)
 #include "Game.h"
 #include <iostream>
 
@@ -19,6 +20,8 @@ Game::Game() : window_(sf::VideoMode(800, 800), "Fizz"), gen_(sf::VideoMode::get
 
 void Game::run()
 {
+	// Implements a fixed timestep loop as detailed in https://gafferongames.com/post/fix_your_timestep/
+	// This means the simulation should give perfectly reproducible results
 	sf::Clock clock;
 	float accumulator = 0.f;
 	constexpr float deltaTime = 1.f/120.f;
@@ -51,36 +54,50 @@ void Game::processEvents()
 		case sf::Event::KeyPressed:
 			if (!config_.isActive()) {
 				if (event.key.code == sf::Keyboard::Key::Q) {
+					// Quit the app
 					window_.close();
 				}
 				else if (event.key.code == sf::Keyboard::Key::C) {
+					// Clear the screen of all objects
 					gen_.clear();
 				}
 				else if (event.key.code == sf::Keyboard::Key::R) {
+					// Reset the objects to their starting positions
 					gen_.reset();
 				}
 				else if (event.key.code == sf::Keyboard::Key::P) {
+					// Pause the simulation (objects can still be added while simulation is paused
 					gen_.togglePaused();
 				}
 				else if (event.key.code == sf::Keyboard::Key::H) {
+					// Hides/shows info about the current performance/configuration options
 					info_.toggleHidden();
 				}
 				else if (event.key.code == sf::Keyboard::Key::G) {
+					// Turns gravity on or off
 					config_.toggleGravity();
 				}
 				else if (event.key.code == sf::Keyboard::Key::T) {
+					// Enables/disables the top of the screen acting like a wall.
+					// When it is disabled, items can occupy space above the top of the screen.
 					config_.toggleTopWall();
 				}
 				else if (event.key.code == sf::Keyboard::Key::F) {
+					// Enables/disables fire mode
+					// In fire mode, the ball is not just dropped after one click, but is launched in a direction after
+					// a second click, as if hit by a pool cue.
 					gen_.toggleFireMode();
 				}
 				else if (event.key.code == sf::Keyboard::Key::SemiColon) {
-					if (event.key.shift) {
+					if (event.key.shift) { // for colon key
+						// Shows the box that can be used to change configuration parameters of the simulation
+						// e.g. force of gravity, size of the objects to be inserted, coefficient of restitution of the objects
 						config_.showCommandBox();
 					};
 				}
 			}
 			else if (event.key.code == sf::Keyboard::Key::Enter) {
+				// Use the enter key to execute a command that has been entered in the command box
 				config_.executeCommand();
 			}
 			break;
@@ -91,6 +108,7 @@ void Game::processEvents()
 			break;
 		case sf::Event::MouseMoved:
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S) && !config_.isActive()) {
+				// Moving the mouse while holding the S key will generate many objects following the mouse
 				gen_.createBallAt(sf::Vector2f((float)event.mouseMove.x, (float)event.mouseMove.y), config_.getState().ballRadius);
 			}
 			break;

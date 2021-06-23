@@ -1,3 +1,4 @@
+// Performs "broad-phase" collision detection using the sweep and prune algorithm
 #pragma once
 #include <utility>
 #include "Ball.h"

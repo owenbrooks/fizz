@@ -1,3 +1,4 @@
+// Displays current fps and configuration parameters (e.g. strength of gravity) in text on screen
 #include "Info.h"
 #include <iostream>
 #include <numeric>

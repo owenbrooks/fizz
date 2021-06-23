@@ -1,3 +1,5 @@
+// A text interface to change simulation parameters values
+// e.g. strength of gravity, size of balls to generate, coefficients of restitution
 #include "Config.h"
 #include <iostream>
 void Config::render(sf::RenderWindow& window)
@@ -53,16 +55,16 @@ void Config::executeCommand()
 		newValueStr = commandStr_.substr(pos + 1);
 		try {
 			float newValue = std::stof(newValueStr);
-			if (propertyName == "ob") {
+			if (propertyName == "ob") { // coefficient of restitution for a collision between two objects
 				state_.objRestitution = newValue;
 			}
-			else if (propertyName == "g") {
+			else if (propertyName == "g") { // force of gravity
 				state_.gravity = newValue;
 			}
-			else if (propertyName == "bo") {
+			else if (propertyName == "bo") { // coefficient of restitution for a collision between an object and the boundary
 				state_.boundaryRestitution = newValue;
 			}
-			else if (propertyName == "rad") {
+			else if (propertyName == "rad") { // radius of the ball objects to generate
 				state_.ballRadius = newValue;
 			}
 		}
