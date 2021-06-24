@@ -15,60 +15,60 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Fizz.cpp">
+    <ClCompile Include="src\Ball.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Ball.cpp">
+    <ClCompile Include="src\BroadPhase.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Generator.cpp">
+    <ClCompile Include="src\Collision.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Game.cpp">
+    <ClCompile Include="src\Config.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Info.cpp">
+    <ClCompile Include="src\Fizz.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Collision.cpp">
+    <ClCompile Include="src\Game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="VecTools.cpp">
+    <ClCompile Include="src\Generator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Config.cpp">
+    <ClCompile Include="src\Info.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BroadPhase.cpp">
+    <ClCompile Include="src\VecTools.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Ball.h">
+    <ClInclude Include="src\AABB.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Generator.h">
+    <ClInclude Include="src\Ball.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Game.h">
+    <ClInclude Include="src\BroadPhase.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Info.h">
+    <ClInclude Include="src\Collision.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Collision.h">
+    <ClInclude Include="src\Config.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="VecTools.h">
+    <ClInclude Include="src\Game.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Config.h">
+    <ClInclude Include="src\Generator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AABB.h">
+    <ClInclude Include="src\Info.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BroadPhase.h">
+    <ClInclude Include="src\VecTools.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

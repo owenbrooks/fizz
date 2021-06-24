@@ -163,26 +163,26 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Ball.cpp" />
-    <ClCompile Include="BroadPhase.cpp" />
-    <ClCompile Include="Collision.cpp" />
-    <ClCompile Include="Config.cpp" />
-    <ClCompile Include="Fizz.cpp" />
-    <ClCompile Include="Generator.cpp" />
-    <ClCompile Include="Game.cpp" />
-    <ClCompile Include="Info.cpp" />
-    <ClCompile Include="VecTools.cpp" />
+    <ClCompile Include="src\Ball.cpp" />
+    <ClCompile Include="src\BroadPhase.cpp" />
+    <ClCompile Include="src\Collision.cpp" />
+    <ClCompile Include="src\Config.cpp" />
+    <ClCompile Include="src\Fizz.cpp" />
+    <ClCompile Include="src\Game.cpp" />
+    <ClCompile Include="src\Generator.cpp" />
+    <ClCompile Include="src\Info.cpp" />
+    <ClCompile Include="src\VecTools.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AABB.h" />
-    <ClInclude Include="Ball.h" />
-    <ClInclude Include="BroadPhase.h" />
-    <ClInclude Include="Collision.h" />
-    <ClInclude Include="Config.h" />
-    <ClInclude Include="Generator.h" />
-    <ClInclude Include="Game.h" />
-    <ClInclude Include="Info.h" />
-    <ClInclude Include="VecTools.h" />
+    <ClInclude Include="src\AABB.h" />
+    <ClInclude Include="src\Ball.h" />
+    <ClInclude Include="src\BroadPhase.h" />
+    <ClInclude Include="src\Collision.h" />
+    <ClInclude Include="src\Config.h" />
+    <ClInclude Include="src\Game.h" />
+    <ClInclude Include="src\Generator.h" />
+    <ClInclude Include="src\Info.h" />
+    <ClInclude Include="src\VecTools.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
