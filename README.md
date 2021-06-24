@@ -1,7 +1,7 @@
 # Fizz
 A colorful bouncing ball simulator with high reproducibility and configurable physics parameters
 
-[![screenshot](./Screenshots/fizz_spread.PNG)](https://www.youtube.com/watch?v=2Ld3AF5m-Y8)
+[![screenshot](./assets/screenshots/fizz_spread.PNG)](https://www.youtube.com/watch?v=2Ld3AF5m-Y8)
 See the [video demo](https://www.youtube.com/watch?v=2Ld3AF5m-Y8)
 
 Performs broad-phase collision detection using the sweep and prune algorithm on axis-aligned bounding boxes.
@@ -27,7 +27,7 @@ sfml-window-2.dll
 sfml-window-d-2.dll
 ```
 
-And the font files:
+And the font files in assets/fonts folder:
 ```
 cour.ttf
 courbd.ttf
