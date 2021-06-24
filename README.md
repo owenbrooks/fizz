@@ -60,3 +60,12 @@ And the font files in assets/fonts folder:
 cour.ttf
 courbd.ttf
 ```
+
+# Useful links
+This is a collection of links that were helpful in learning how to program a nice simulation:
+- Fixed time step: https://gafferongames.com/post/fix_your_timestep/
+- Game loop: http://gameprogrammingpatterns.com/game-loop.html
+- Stopping bodies from sinking into the ground: https://gamedev.stackexchange.com/questions/114728/how-to-stop-sinking-bodies-in-physics-engine-c
+- Collision detection: https://www.toptal.com/game/video-game-physics-part-ii-collision-detection-for-solid-objects
+- Collision detection/resolution: https://www.randygaul.net/2013/03/28/custom-physics-engine-part-2-manifold-generation/
+- Collision resolution: http://www.cs.uu.nl/docs/vakken/mgp/2014-2015/Lecture%207%20-%20Collision%20Resolution.pdf
