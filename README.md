@@ -8,8 +8,36 @@ Performs broad-phase collision detection using the sweep and prune algorithm on 
 
 The force of gravity, coefficients of restitution (that is, the bounciness of the objects) and the ball radii are configurable.
 
-SFML is used for graphics display.
+[SFML](https://www.sfml-dev.org/) is used for graphics display.
 
+The project was built in Visual Studio 2019.
+
+# Controls
+- Quit the simulation using the 'q' key
+- Enable/disable gravity using the 'g' key
+- Add an object by clicking on the screen
+- Fire an object with an initial velocity by pressing 'f', and clicking then dragging on the screen, then clicking again
+- Add a stream of objects by holding 's' and dragging the mouse
+- Enable/disable the top wall using the 't' key
+- Pause/unpause simulation using the 'p' key
+- Reset all objects to their initial position using the 'r' key
+- Show/hide physical constants and current fps using the 'h' key
+
+# Configuring physical constants
+The constants for gravity and coefficients of restitution can be edited via the configuration box.
+
+1. Open the box by typing 'shift-;'
+
+2. Then type 'param value', such as 'g 0.002' to change the value of a parameter
+
+Available parameters:
+
+- g - constant of gravitational acceleration
+- rad - radius of circle objects to be inserted
+- ob - object-to-object coefficient of restitution 
+- bo - boundary-to-object coefficient of restitution
+
+# Building the project
 The project was built in Visual Studio 2019.
 
 The following .dll files are required:
