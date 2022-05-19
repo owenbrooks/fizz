@@ -38,7 +38,7 @@ Available parameters:
 - bo - boundary-to-object coefficient of restitution
 
 # Building the project
-The project was built in Visual Studio 2019.
+The project was built in Visual Studio 2019 on Windows 10.
 
 The following .dll files are required:
 ```
@@ -60,6 +60,14 @@ And the font files in assets/fonts folder:
 cour.ttf
 courbd.ttf
 ```
+
+It can also be built on linux:
+`cd fizz`
+`mkdir build`
+`cd build`
+`cmake .. -DCMAKE_BUILD_TYPE=Release`
+`cmake --build ..`
+`./Fizz`
 
 # Useful links
 This is a collection of links that were helpful in learning how to program a nice simulation:
