@@ -18,7 +18,7 @@ if(NOT CMAKE_BUILD_TYPE)
 endif()
 
 # Generate config.h
-configure_file(config.h.in config.h)
+# configure_file(config.h.in config.h)
 
 # Find SFML shared libraries
 find_package(SFML 2.5 
